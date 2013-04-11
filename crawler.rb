@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 require 'eventmachine'
+require 'em/pool'
 require 'em-http-request'
-require 'monitor'
 
 class RssFetcher
   class CategolizedPool < EM::Pool
@@ -29,7 +29,10 @@ class RssFetcher
               @category_queue[category].push c
             end
           }
-          work.call.callback(&rq).errback(&rq)
+          d = work.call
+          d.callback(&rq)
+          d.errback(&rq)
+          d
         }
       end
     end
