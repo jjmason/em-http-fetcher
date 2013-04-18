@@ -6,6 +6,8 @@ require 'uri'
 
 module EventMachine
   class HttpFetcher
+    VERSION = "0.0.1"
+
     class RequestPool
       def initialize(total_size, host_resource_size, host_reuse_wait = 0, opts = {})
         super()
