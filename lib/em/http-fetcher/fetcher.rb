@@ -73,7 +73,7 @@ module EventMachine
     def initialize(opts = {})
       @concurrency       = opts[:concurrency]       || 40
       @host_concurrency  = opts[:host_concurrency]  || 2
-      @host_request_wait = opts[:host_request_wait] || 0.3
+      @host_request_wait = opts[:host_request_wait] || 0.2
       @request_pool      = nil
       @default_callbacks = []
       @default_errbacks  = []
