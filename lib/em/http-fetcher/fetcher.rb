@@ -99,7 +99,7 @@ module EventMachine
         uri = opts.delete(:uri)
       else
         uri = args.first
-        opts = {}
+        opts = args[1].kind_of?(Hash) ? args[1] : {}
       end
 
       uri.kind_of?(URI) or uri = URI.parse(uri.to_s)
