@@ -34,31 +34,24 @@ concurrency regardless of EM's thread pool.
 
 == Options for HttpFetcher.new
 
-: :concurrency
-  Concurrency for all request.
-: :host_concurrency
-  Concurrency per host.
-: :host_request_wait
-  Wait specified seconds after request on each request thread.
-: (all other keys)
-  Pass through for HttpRequest.new
+[:concurrency] Concurrency for all request.
+[:host_concurrency] Concurrency per host.
+[:host_request_wait] Wait specified seconds after request on each request thread.
+[(all other keys)] Pass through for HttpRequest.new
 
 == Options for HttpFetcher#request
 
-: :uri
-  Target URI (String or URI object)
-: :method (default=:get)
-  Request method (get/head/put...)
-: (all other keys)
-  Pass through for HttpRequest#(get/head/put...)
+[:uri] Target URI (String or URI object)
+[:method] Request method (get/head/put...) (default=:get)
+[(all other keys)] Pass through for HttpRequest#(get/head/put...)
 
 If first argument is not a hash, it will be treated as :uri.
 
 = Limitations
 
- * :host_concurrency is checked only for initial URI.
-   When request is redirected, number of parallel requests for
-   one host may be over host_concurrency.
+* :host_concurrency is checked only for initial URI.
+  When request is redirected, number of parallel requests for
+  one host may be over host_concurrency.
 
 = License
 
