@@ -1,7 +1,7 @@
 = em-http-fetcher
 
-HTTP fetch client based on ruby EventMachne that has configureable
-concurrency regardless of EM's thread pool.
+HTTP fetch client based on ruby EventMachne and EM-HTTP-Request
+that has configureable concurrency regardless of EM's thread pool.
 
 = Example
 
@@ -52,7 +52,14 @@ If first argument is not a hash, it will be treated as :uri.
 * :host_concurrency is checked only for initial URI.
   When request is redirected, number of parallel requests for
   one host may be over host_concurrency.
+* Redirections will not work until issue #230 of em-http-request
+  is resolved; https://github.com/igrigorik/em-http-request/pull/230
 
 = License
 
 Same as Ruby 2.0 (2-clause BSDL or Ruby original license)
+
+= See Also
+
+EventMachine:: http://rubyeventmachine.com/
+EM-HTTP-Request:: https://github.com/igrigorik/em-http-request
