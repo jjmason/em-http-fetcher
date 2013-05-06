@@ -2,7 +2,7 @@
 require 'eventmachine'
 require 'em/pool'
 require 'em-http-request'
-require 'uri'
+require 'addressable/uri'
 
 module EventMachine
   class HttpFetcher
@@ -111,7 +111,8 @@ module EventMachine
         opts = args[1].kind_of?(Hash) ? args[1] : {}
       end
 
-      uri.kind_of?(URI) or uri = URI.parse(uri.to_s)
+      uri.kind_of?(Addressable::URI) or
+        uri = Addressable::URI.parse(uri.to_s)
       opts = {
         :keepalive => true,
         :redirects => 20,
