@@ -37,8 +37,15 @@ module EventMachine
           @total_queue.pop do |tqi|
             @host_pools[host][:last_used] = Time.now
             @host_pools[host][:pool].remove conn
-            rq = proc {
+            rq = proc { |req|
               @total_queue.push tqi
+              lurl = req.last_effective_url
+              unless "#{lurl.scheme}://#{lurl.host}" == host
+                # Connection has been redirected another server.
+                # Re-create connection instance.
+                conn = EM::HttpRequest.new(host)
+              end
+
               if @host_reuse_wait > 0
                 EM.add_timer(@host_reuse_wait) {
                   @host_pools[host][:pool].add conn
