@@ -3,7 +3,7 @@
 HTTP fetch client based on ruby EventMachne and EM-HTTP-Request
 that has configureable concurrency regardless of EM's thread pool.
 
-= Example
+== Example
 
   EM.run do
     trap(:INT) { EM.stop }
@@ -30,16 +30,40 @@ that has configureable concurrency regardless of EM's thread pool.
     end
   end
 
-= Usage
+== Install
 
-== Options for HttpFetcher.new
+After em-http-request *1.0.4* *or* *above* is released, you can install with gem.
+Currently em-http-fetcher depends (> 1.0.3) to prevent to install intentionally.
+
+  $ gem install em-http-fetcher
+
+=== Workaround with bundler
+
+  gem install bundler
+
+And create Gemfile to fetch develop version of em-http-request.
+
+  source "http://rubygems.org"
+  gem 'em-http-request', :git => 'git://github.com/igrigorik/em-http-request.git'
+
+Then run bundle to install gems.
+
+  $ bundle
+
+Finally run your script with "bundle exec".
+
+  $ bundle exec YOUR_SCRIPT
+
+== Usage
+
+=== Options for HttpFetcher.new
 
 [:concurrency] Concurrency for all request.
 [:host_concurrency] Concurrency per host.
 [:host_request_wait] Wait specified seconds after request on each request thread.
 [(all other keys)] Pass through for HttpRequest.new
 
-== Options for HttpFetcher#request
+=== Options for HttpFetcher#request
 
 [:uri] Target URI (String or URI object)
 [:method] Request method (get/head/put...) (default=:get)
@@ -47,7 +71,7 @@ that has configureable concurrency regardless of EM's thread pool.
 
 If first argument is not a hash, it will be treated as :uri.
 
-= Limitations
+== Limitations
 
 * :host_concurrency is checked only for initial URI.
   When request is redirected, number of parallel requests for
@@ -55,11 +79,11 @@ If first argument is not a hash, it will be treated as :uri.
 * Redirections will not work until issue #230 of em-http-request
   is resolved; https://github.com/igrigorik/em-http-request/pull/230
 
-= License
+== License
 
 Same as Ruby 2.0 (2-clause BSDL or Ruby original license)
 
-= See Also
+== See Also
 
 EventMachine:: http://rubyeventmachine.com/
 EM-HTTP-Request:: https://github.com/igrigorik/em-http-request
