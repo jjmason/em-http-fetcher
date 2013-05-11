@@ -32,8 +32,7 @@ that has configureable concurrency regardless of EM's thread pool.
 
 == Install
 
-After em-http-request *1.0.4* *or* *above* is released, you can install with gem.
-Currently em-http-fetcher depends (> 1.0.3) to prevent to install intentionally.
+You can install with gem. However em-http-request (=< 1.0.3) has a redirection issue. If you need to handle redirection properly, try following workaround.
 
   $ gem install em-http-fetcher
 
@@ -74,8 +73,8 @@ If first argument is not a hash, it will be treated as :uri.
 == Limitations
 
 * :host_concurrency is checked only for initial URI.
-  When request is redirected, number of parallel requests for
-  one host may be over host_concurrency.
+  When request is redirected to another host, number of parallel
+   requests for one host may be over host_concurrency.
 * Redirections will not work until issue #230 of em-http-request
   is resolved; https://github.com/igrigorik/em-http-request/pull/230
 

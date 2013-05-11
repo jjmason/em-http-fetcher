@@ -3,10 +3,21 @@ require 'eventmachine'
 require 'em/pool'
 require 'em-http-request'
 require 'addressable/uri'
+unless EM::HttpRequest.const_defined? :VERSION
+  require 'em-http/version'
+end
+
+if EM::HttpRequest::VERSION == '1.0.3' &&
+    Module.const_defined?(:HttpClientOptions) &&
+    !HttpClientOptions.instance_method(:set_uri).parameters.member?([:opt, :path])
+  warn "[WARN] EM-HTTP-Request release 1.0.3 has redirection handling issue.\n" +
+    "       Redirection in same host will NOT wrok and may cause loop!\n" +
+    "       See https://github.com/igrigorik/em-http-request/pull/230 for details."
+end
 
 module EventMachine
   class HttpFetcher
-    VERSION = "0.1.0"
+    VERSION = "0.1.1"
 
     class RequestPool
       def initialize(total_size, host_resource_size, host_reuse_wait = 0, opts = {})
