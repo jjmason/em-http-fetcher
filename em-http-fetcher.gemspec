@@ -15,11 +15,13 @@ Gem::Specification.new do |s|
 
 #  s.rubyforge_project = ""
 
+  s.required_ruby_version = '>= 1.9.0'
+
   s.add_dependency "addressable", ">= 2.2.3"
   s.add_dependency "em-http-request", "> 1.0.3"
 
-  s.add_development_dependency "rspec"
-  s.add_development_dependency "rake"
+#  s.add_development_dependency "rspec"
+#  s.add_development_dependency "rake"
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
